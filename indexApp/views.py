@@ -9,3 +9,5 @@ def index(request):
 
 class StaffListView(ListView):
     model = Staff
+    template_name = 'driveAdmin/staff.html'
+    context_object_name = 'staff'
