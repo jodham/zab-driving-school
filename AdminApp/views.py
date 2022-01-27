@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import *
-from django.views.generic import ListView
+from django.views.generic import *
+from drivingschool.indexApp.models import Staff
 
 
 def index(request):
@@ -9,3 +9,5 @@ def index(request):
 
 class StaffListView(ListView):
     model = Staff
+    template_name = 'driveAdmin/staff.html'
+    context_object_name = 'staff'
