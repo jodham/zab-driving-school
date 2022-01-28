@@ -10,40 +10,25 @@
                   <th scope="col">#</th>
                   <th scope="col">First</th>
                   <th scope="col">Last</th>
-                  <th scope="col">email</th>
-                  <th scope="col">address</th>
                   <th scope="col">phone</th>
-                  <th scope="col">Job Title</th>
+                  <th scope="col">email</th>
+                  <th scope="col">License Type</th>
+                  <th scope="col">View Customer</th>
+
                 </tr>
               </thead>
               <tbody>
+              {% for x in customer %}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
+                  <th scope="row">{{x.customer_id}}</th>
+                  <td>{{x.fname}}</td>
+                  <td>{{x.lname}}</td>
+                  <td>{{x.phone}}</td>
+                  <td>{{x.email}}</td>
+                  <td>{{x.License_type}}</td>
+                    <td><a class="btn bg-info">view>></a> </td>
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
+                {%endfor%}
               </tbody>
             </table>
         </div>

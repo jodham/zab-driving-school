@@ -40,7 +40,7 @@ class LessonsListView(ListView):
 class CustomerListView(ListView):
     model = Customer
     template_name = 'driveAdmin/customer.html'
-    context_object_name = 'staff'
+    context_object_name = 'customer'
 
 
 class RequestsListView(ListView):
