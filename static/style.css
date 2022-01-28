@@ -7,10 +7,10 @@
 
 */
 body{
-    background-color: #F8F8FF !important;
+    background-color: #FEFFFF !important;
 }
 .navbar{
-	background-color: #061a37 !important;
+	background-color: #17252A !important;
 
 }
 .navbar .navbar-brand{
@@ -89,12 +89,17 @@ body{
 }
 /*copyright style*/
 
-/*-------------------------carousel--------------------------*/
-.carousel-item{
-	height: 90vh;
-	min-height: 300px;
-	background: no-repeat scroll center scroll;
-	-webkit-background-size: cover;
-	background-size: cover;
+/*-------------------------styles--------------------------*/
+.mycard{
+	background-color: #3AAFA9;
 }
-/*----------------x---------carousel--------------x-----------*/
+.mytitle{
+	color: #FEFFFF;
+}
+.mylabel{
+	color: #17252A;
+}
+.mypagetitle{
+	color: #2B7A7B;
+}
+/*----------------x---------styles--------------x-----------*/

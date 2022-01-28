@@ -1,17 +1,17 @@
 {% extends 'assets/base.html' %}
 {% block content %}
 <div class="container">
-    <div class="py-5 text-center h2 text-info">Admin Page</div>
+    <div class="py-5 text-center h2 mt-3 mypagetitle">Admin Page</div>
     <div class="row my-2" style="margin: 1px;">
 
 
         <div class="col-sm-4 mt-3 p-3">
-            <div class="card">
+            <div class="card mycard">
                 <div class="card-header">
-                <div class="card-title">vehicles</div>
+                <div class="card-title mytitle h4 text-center">vehicles</div>
                 </div>
                 <div class="card-body">
-                    <label class="h4">Total : 0</label>
+                    <label class="mylabel h4">Total : {{totalvehicles}}</label>
 
                 </div>
             </div>
@@ -19,12 +19,12 @@
         </div>
 
         <div class="col-sm-4 mt-3 p-3">
-            <div class="card">
+            <div class="card mycard">
                 <div class="card-header">
-                <div class="card-title">services</div>
+                <div class="card-title mytitle h4 text-center">services</div>
                 </div>
                 <div class="card-body">
-                    <label class="h4">Total : 0</label>
+                    <label class=" mylabel h4">Total : 0</label>
 
                 </div>
             </div>
@@ -32,12 +32,12 @@
         </div>
 
         <div class="col-sm-4 mt-3 p-3">
-            <div class="card">
+            <div class="card mycard">
                 <div class="card-header">
-                <div class="card-title">Lessons</div>
+                <div class="card-title mytitle h4 text-center">Lessons</div>
                 </div>
                 <div class="card-body">
-                    <label class="h4">Total : 0</label>
+                    <label class="mylabel h4">Total : {{totallessons}}</label>
 
                 </div>
             </div>
@@ -45,12 +45,12 @@
         </div>
 
         <div class="col-sm-4 mt-3 p-3">
-            <div class="card">
+            <div class="card mycard">
                 <div class="card-header">
-                <div class="card-title">Customers</div>
+                <div class="card-title mytitle h4 text-center">Customers</div>
                 </div>
                 <div class="card-body">
-                    <label class="h4">Total : 0</label>
+                    <label class="mylabel h4">Total : {{totalcustomers}}</label>
 
                 </div>
             </div>
@@ -58,17 +58,31 @@
         </div>
 
         <div class="col-sm-4 mt-3 p-3">
-            <div class="card">
+            <div class="card mycard">
                 <div class="card-header">
-                <div class="card-title">Requests</div>
+                <div class="card-title mytitle h4 text-center">Requests</div>
                 </div>
                 <div class="card-body">
-                    <label class="h4">Total : 0</label>
+                    <label class="mylabel h4">Total : {{totalrequests}}</label>
 
                 </div>
             </div>
 
         </div>
+
+        <div class="col-sm-4 mt-3 p-3">
+            <div class="card mycard">
+                <div class="card-header">
+                <div class="card-title mytitle h4 text-center">Staff</div>
+                </div>
+                <div class="card-body">
+                    <label class="mylabel h4">Total : {{ totalstaff }}</label>
+                </div>
+            </div>
+
+        </div>
+
+
     </div>
 </div>
 {% endblock content %}
