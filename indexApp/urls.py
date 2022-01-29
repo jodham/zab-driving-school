@@ -9,5 +9,5 @@ urlpatterns = [
     path('request/', RequestsListView.as_view(), name='request'),
     path('vehicle/', VehicleListView.as_view(), name='vehicle'),
     path('vehicle/new/', VehicleCreateView.as_view(), name='vehicle-create'),
-    path('vehicle/<int:pk>/update/', VehicleUpdateView.as_view(), name='vehicle-update'),
+    path('vehicle/<str:pk>/update/', VehicleUpdateView.as_view(), name='vehicle-update'),
 ]

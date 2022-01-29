@@ -67,10 +67,11 @@ class VehicleCreateView(CreateView):
 # ------------------x-----------CreateView-------x---------->
 
 # -----------------------------updateView------------------>
-class VehicleUpdateView(CreateView):
+class VehicleUpdateView(UpdateView):
     model = Vehicle
     fields = ['vehicleId', 'vehicletypeId', 'vehicleModel', 'registrationDetails']
 
     def form_valid(self, form):
         return super().form_valid()
+
 # ------------------x-----------updateView-------x---------->
