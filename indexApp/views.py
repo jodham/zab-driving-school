@@ -64,6 +64,20 @@ class VehicleCreateView(CreateView):
         return super().form_valid()
 
 
+class CustomerCreateView(CreateView):
+    model = Customer
+    fields = ['customer_id', 'fname', 'lname', 'DOB', 'phone', 'email', 'License_type']
+
+    def form_valid(self, form):
+        return super().form_valid()
+
+
+class StaffCreateView(CreateView):
+    model = Staff
+    fields = ['vehicleId', 'vehicletypeId', 'vehicleModel', 'registrationDetails']
+
+    def form_valid(self, form):
+        return super().form_valid()
 # ------------------x-----------CreateView-------x---------->
 
 # -----------------------------updateView------------------>

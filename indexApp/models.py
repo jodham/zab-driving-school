@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 class Address(models.Model):
-    addressId = models.CharField(primary_key=True, max_length=5)
+    addressId = models.AutoField(primary_key=True)
     street = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
     region = models.CharField(max_length=20)
@@ -15,7 +15,7 @@ class Address(models.Model):
 
 
 class JobTitle(models.Model):
-    job_titleId = models.CharField(primary_key=True, max_length=5)
+    job_titleId = models.AutoField(primary_key=True)
     job_titleDesc = models.CharField(max_length=50)
 
     def __str__(self):
@@ -37,7 +37,7 @@ class Staff(models.Model):
 
 
 class LicenseType(models.Model):
-    licenseTypeId = models.CharField(primary_key=True, max_length=5)
+    licenseTypeId = models.AutoField(primary_key=True)
     licenseTypeDesc = models.CharField(max_length=100)
 
     def __str__(self):
@@ -45,7 +45,7 @@ class LicenseType(models.Model):
 
 
 class VehicleType(models.Model):
-    vehicletypeId = models.CharField(primary_key=True, max_length=10)
+    vehicletypeId = models.AutoField(primary_key=True)
     vehicletypeDesc = models.CharField(max_length=50)
 
     def __str__(self):
@@ -53,7 +53,7 @@ class VehicleType(models.Model):
 
 
 class Vehicle(models.Model):
-    vehicleId = models.CharField(primary_key=True, max_length=10)
+    vehicleId = models.AutoField(primary_key=True)
     vehicletypeId = models.ForeignKey(VehicleType, on_delete=models.CASCADE)
     vehicleModel = models.CharField(max_length=30)
     registrationDetails = models.CharField(max_length=30)
@@ -80,25 +80,25 @@ class Customer(models.Model):
 
 
 class Service_type(models.Model):
-    servicetypeId = models.CharField(primary_key=True, max_length=5)
+    servicetypeId = models.AutoField(primary_key=True)
     servicetypeDesc = models.CharField(max_length=100)
 
 
 class Service(models.Model):
-    serviceId = models.CharField(primary_key=True, max_length=5)
+    serviceId = models.CharField(primary_key=True, max_length=10)
     service_desc = models.TextField()
     service_type_id = models.ForeignKey(Service_type, on_delete=models.CASCADE)
     cost = models.CharField(max_length=5)
 
 
 class RequestStatus(models.Model):
-    requestStatusId = models.CharField(primary_key=True, max_length=5)
+    requestStatusId = models.AutoField(primary_key=True)
     requetstatusdesc = models.CharField(max_length=5)
     is_active = models.CharField(max_length=3)
 
 
 class Request(models.Model):
-    requestId = models.CharField(primary_key=True, max_length=5)
+    requestId = models.CharField(primary_key=True, max_length=10)
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     startDate = models.DateTimeField()
     RequestStatusId = models.ForeignKey(RequestStatus, on_delete=models.CASCADE)
@@ -115,19 +115,19 @@ class Lesson(models.Model):
 
 
 class Service_lesson(models.Model):
-    servicelessonId = models.CharField(primary_key=True, max_length=10)
+    servicelessonId = models.AutoField(primary_key=True)
     serviceId = models.ForeignKey(Service, on_delete=models.CASCADE)
     lessson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
 
 class Reservation_status(models.Model):
-    reservationStatusId = models.CharField(primary_key=True, max_length=10)
+    reservationStatusId = models.AutoField(primary_key=True)
     reservationStatusdesc = models.TextField()
     is_active = models.CharField(max_length=1)
 
 
 class Reservation(models.Model):
-    reservationId = models.CharField(primary_key=True, max_length=5)
+    reservationId = models.CharField(primary_key=True, max_length=10)
     request_id = models.ForeignKey(Request, on_delete=models.CASCADE)
     Vehicle_id = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     Service_lessonId = models.ForeignKey(Service_lesson, on_delete=models.CASCADE)
