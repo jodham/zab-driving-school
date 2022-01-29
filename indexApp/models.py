@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 
 class Address(models.Model):
@@ -9,10 +10,16 @@ class Address(models.Model):
     region = models.CharField(max_length=20)
     zipcode = models.IntegerField()
 
+    def __str__(self):
+        return f'{self.city, self.zipcode}'
+
 
 class JobTitle(models.Model):
     job_titleId = models.CharField(primary_key=True, max_length=5)
     job_titleDesc = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f'{self.job_titleDesc}'
 
 
 class Staff(models.Model):
@@ -25,15 +32,24 @@ class Staff(models.Model):
     job_titleId = models.ForeignKey(JobTitle, on_delete=models.CASCADE)
     is_active = models.CharField(max_length=3)
 
+    def __str__(self):
+        return f'{self.job_titleId, self.lname}'
+
 
 class LicenseType(models.Model):
     licenseTypeId = models.CharField(primary_key=True, max_length=5)
     licenseTypeDesc = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f'{self.licenseTypeDesc}'
+
 
 class VehicleType(models.Model):
     vehicletypeId = models.CharField(primary_key=True, max_length=10)
     vehicletypeDesc = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f'{self.vehicletypeDesc}'
 
 
 class Vehicle(models.Model):
@@ -41,6 +57,12 @@ class Vehicle(models.Model):
     vehicletypeId = models.ForeignKey(VehicleType, on_delete=models.CASCADE)
     vehicleModel = models.CharField(max_length=30)
     registrationDetails = models.CharField(max_length=30)
+
+    def __str__(self):
+        return f'{self.vehicleModel}'
+
+    def get_abolute_url(self):
+        return reverse('car-update', kwargs={'pk': self.pk})
 
 
 class Customer(models.Model):
@@ -52,6 +74,9 @@ class Customer(models.Model):
     email = models.EmailField()
     License_type = models.ForeignKey(LicenseType, on_delete=models.CASCADE)
     is_active = models.CharField(max_length=1)
+
+    def __str__(self):
+        return f'{self.fname, self.lname}'
 
 
 class Service_type(models.Model):

@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from .models import *
-from django.views.generic import ListView
+from django.views.generic import *
+
+
+# -------------------x-----------ListView------------------>
 
 
 def index(request):
     totalstaff = Staff.objects.all().count()
     totalvehicles = Vehicle.objects.all().count()
     totallessons = Lesson.objects.all().count()
-    totalcustomers = Staff.objects.all().count()
+    totalcustomers = Customer.objects.all().count()
     totalrequests = Request.objects.all().count()
     context = {'totalstaff': totalstaff, 'totalvehicles': totalvehicles,
                'totallessons': totallessons, 'totalcustomers': totalcustomers, 'totalrequests': totalrequests}
@@ -47,3 +50,27 @@ class RequestsListView(ListView):
     model = Request
     template_name = 'driveAdmin/request.html'
     context_object_name = 'request'
+
+
+# -------------------x-----------ListView------------------>
+
+
+# -----------------------------CreateView------------------>
+class VehicleCreateView(CreateView):
+    model = Vehicle
+    fields = ['vehicleId', 'vehicletypeId', 'vehicleModel', 'registrationDetails']
+
+    def form_valid(self, form):
+        return super().form_valid()
+
+
+# ------------------x-----------CreateView-------x---------->
+
+# -----------------------------updateView------------------>
+class VehicleUpdateView(CreateView):
+    model = Vehicle
+    fields = ['vehicleId', 'vehicletypeId', 'vehicleModel', 'registrationDetails']
+
+    def form_valid(self, form):
+        return super().form_valid()
+# ------------------x-----------updateView-------x---------->
