@@ -3,15 +3,15 @@ from django.utils import timezone
 from django.urls import reverse
 
 
-class Address(models.Model):
-    addressId = models.AutoField(primary_key=True)
-    street = models.CharField(max_length=20)
-    city = models.CharField(max_length=20)
-    region = models.CharField(max_length=20)
-    zipcode = models.IntegerField()
+# class adress(models.Model):
+#  addressId = models.AutoField()
+#  street = models.CharField(max_length=20)
+#  city = models.CharField(max_length=20)
+# region = models.CharField(max_length=20)
+# zipcode = models.IntegerField(max_length=10)
 
-    def __str__(self):
-        return f'{self.city, self.zipcode}'
+# def __str__(self):
+#   return f'{self.city, self.zipcode}'
 
 
 class JobTitle(models.Model):
@@ -27,7 +27,7 @@ class Staff(models.Model):
     fname = models.CharField(max_length=25)
     lname = models.CharField(max_length=25)
     email = models.EmailField()
-    addressId = models.ForeignKey(Address, on_delete=models.CASCADE)
+    # addressId = models.ForeignKey(adress, on_delete=models.CASCADE)
     mobile = models.CharField(max_length=15)
     job_titleId = models.ForeignKey(JobTitle, on_delete=models.CASCADE)
     is_active = models.CharField(max_length=3)
@@ -66,7 +66,7 @@ class Vehicle(models.Model):
 
 
 class Customer(models.Model):
-    customer_id = models.CharField(primary_key=True, max_length=5)
+    customer_id = models.AutoField(primary_key=True)
     fname = models.CharField(max_length=25)
     lname = models.CharField(max_length=25)
     DOB = models.DateField()
@@ -78,6 +78,9 @@ class Customer(models.Model):
     def __str__(self):
         return f'{self.fname, self.lname}'
 
+    def get_absolute_url(self):
+        return reverse('customer_detail', kwargs={'pk': self.pk})
+
 
 class Service_type(models.Model):
     servicetypeId = models.AutoField(primary_key=True)
@@ -85,7 +88,7 @@ class Service_type(models.Model):
 
 
 class Service(models.Model):
-    serviceId = models.CharField(primary_key=True, max_length=10)
+    serviceId = models.AutoField(primary_key=True)
     service_desc = models.TextField()
     service_type_id = models.ForeignKey(Service_type, on_delete=models.CASCADE)
     cost = models.CharField(max_length=5)
@@ -104,11 +107,11 @@ class Request(models.Model):
     RequestStatusId = models.ForeignKey(RequestStatus, on_delete=models.CASCADE)
     vehicleTypeId = models.ForeignKey(VehicleType, on_delete=models.CASCADE)
     DateCreated = models.DateTimeField(timezone.now)
-    Created_by =models.CharField(max_length=25)
+    Created_by = models.CharField(max_length=25)
 
 
 class Lesson(models.Model):
-    lesson_id = models.CharField(primary_key=True, max_length=10)
+    lesson_id = models.AutoField(primary_key=True)
     lessonTitle = models.CharField(max_length=50)
     cost = models.CharField(max_length=5)
     duration = models.CharField(max_length=20)
@@ -138,5 +141,3 @@ class Reservation(models.Model):
     created_by = models.CharField(max_length=25)
     last_modified_date = models.DateTimeField()
     last_modifiedby = models.CharField(max_length=25)
-
-

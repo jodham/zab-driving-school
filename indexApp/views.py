@@ -78,6 +78,8 @@ class StaffCreateView(CreateView):
 
     def form_valid(self, form):
         return super().form_valid()
+
+
 # ------------------x-----------CreateView-------x---------->
 
 # -----------------------------updateView------------------>
@@ -88,4 +90,15 @@ class VehicleUpdateView(UpdateView):
     def form_valid(self, form):
         return super().form_valid()
 
+
 # ------------------x-----------updateView-------x---------->
+
+# -----------------------------DetailView------------------>
+class CustomerDetailView(DetailView):
+    model = Customer
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+# -----------------------------DetailView------------------>
