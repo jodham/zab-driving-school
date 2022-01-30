@@ -79,7 +79,7 @@ class Customer(models.Model):
         return f'{self.fname, self.lname}'
 
     def get_absolute_url(self):
-        return reverse('customer_detail', kwargs={'pk': self.pk})
+        return reverse('Customer_detail', kwargs={'pk': self.pk})
 
 
 class Service_type(models.Model):

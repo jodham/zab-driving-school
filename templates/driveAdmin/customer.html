@@ -26,7 +26,7 @@
                   <td>{{x.phone}}</td>
                   <td>{{x.email}}</td>
                   <td>{{x.License_type}}</td>
-                    <td><a href="{% url 'customer_detail' Customer.id %}" class="btn bg-info btn-secondary btn-sm">view>></a> </td>
+                    <td><a href="{% url 'Customer_detail' customer.id %}" class="btn bg-info btn-secondary btn-sm">view>></a> </td>
                 </tr>
                 {%endfor%}
               </tbody>
