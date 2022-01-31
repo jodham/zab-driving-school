@@ -44,6 +44,7 @@ class CustomerListView(ListView):
     model = Customer
     template_name = 'driveAdmin/customer.html'
     context_object_name = 'customer'
+    ordering = ['-fname']
 
 
 class RequestsListView(ListView):
@@ -96,5 +97,6 @@ class VehicleUpdateView(UpdateView):
 # -----------------------------DetailView------------------>
 class CustomerDetailView(DetailView):
     model = Customer
+    template_name = 'customer_detail.html'
 
 # -----------------------------DetailView------------------>

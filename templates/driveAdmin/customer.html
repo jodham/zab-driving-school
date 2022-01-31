@@ -3,34 +3,14 @@
 <div class="container">
     <div class="py-5 text-center h3 mt-3 text-info">View Customers</div>
     <div class="row">
-        <div class="col-md-10 mt-3 p-3 shadow-lg">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">phone</th>
-                  <th scope="col">email</th>
-                  <th scope="col">License Type</th>
-                  <th scope="col">View Customer</th>
-
-                </tr>
-              </thead>
-              <tbody>
-              {% for x in customer %}
-                <tr>
-                  <th scope="row">{{x.customer_id}}</th>
-                  <td>{{x.fname}}</td>
-                  <td>{{x.lname}}</td>
-                  <td>{{x.phone}}</td>
-                  <td>{{x.email}}</td>
-                  <td>{{x.License_type}}</td>
-                    <td><a href="{% url 'Customer_detail' customer.id %}" class="btn bg-info btn-secondary btn-sm">view>></a> </td>
-                </tr>
-                {%endfor%}
-              </tbody>
-            </table>
+        <div class="col-md-10 mt-3 shadow-lg">
+                <div class="card-body d-flex">
+                    <label class="ml-2">item1</label>
+                    <label class="ml-5">item2</label>
+                    <label class="ml-5">item2</label>
+                    <label class="ml-5">item2</label>
+                    <label class="ml-5">item2</label>>
+                </div>
         </div>
     </div>
 </div>
