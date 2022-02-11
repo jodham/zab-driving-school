@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import *
-from django.views.generic import *
+from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic.edit import CreateView
 
 
 # -------------------x-----------ListView------------------>
@@ -44,7 +45,6 @@ class CustomerListView(ListView):
     model = Customer
     template_name = 'driveAdmin/customer.html'
     context_object_name = 'customer'
-    ordering = ['-fname']
 
 
 class RequestsListView(ListView):
@@ -59,27 +59,7 @@ class RequestsListView(ListView):
 # -----------------------------CreateView------------------>
 class VehicleCreateView(CreateView):
     model = Vehicle
-    fields = ['vehicleId', 'vehicletypeId', 'vehicleModel', 'registrationDetails']
-
-    def form_valid(self, form):
-        return super().form_valid()
-
-
-class CustomerCreateView(CreateView):
-    model = Customer
-    fields = ['customer_id', 'fname', 'lname', 'DOB', 'phone', 'email', 'License_type']
-
-    def form_valid(self, form):
-        return super().form_valid()
-
-
-class StaffCreateView(CreateView):
-    model = Staff
-    fields = ['vehicleId', 'vehicletypeId', 'vehicleModel', 'registrationDetails']
-
-    def form_valid(self, form):
-        return super().form_valid()
-
+    fields = ['vehicletypeId', 'vehicleModel', 'registrationDetails']
 
 # ------------------x-----------CreateView-------x---------->
 
@@ -97,6 +77,10 @@ class VehicleUpdateView(UpdateView):
 # -----------------------------DetailView------------------>
 class CustomerDetailView(DetailView):
     model = Customer
-    template_name = 'customer_detail.html'
+    template_name = 'indexApp/customer_detail.html'
 
+
+class StaffDetailView(DetailView):
+    model = Staff
+    template_name = 'indexApp/staff_detail.html'
 # -----------------------------DetailView------------------>

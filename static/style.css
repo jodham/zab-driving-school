@@ -102,4 +102,15 @@ body{
 .mypagetitle{
 	color: #2B7A7B;
 }
+.card-body .itemLabels{
+	margin-left: ;
+}
+/*--------------------------------customer--page------------*/
+.cardhead{
+	background-color: #DEF2F1;
+}
+.cardhead label{
+	font-weight: bold;
+}
+/*---------------x-----------------customer--page-------x-----*/
 /*----------------x---------styles--------------x-----------*/

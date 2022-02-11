@@ -7,14 +7,16 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="{%static 'bootstrap/css/bootstrap.min.css'%}">
     <link rel="stylesheet" type="text/css" href="{%static 'style.css'%}">
-     <script type="text/javascript" src="{%static 'js/style.js'%}"></script>
-    <script type="text/javascript" src="{%static 'js/jquery.min.js'%}"></script>
-	<script type="text/javascript" src="{%static 'bootstrap/js/bootstrap.min.js'%}"></script>
 </head>
 <body>
 {% include 'assets/adminNav.html' %}
 {% block content %}
 
 {% endblock content %}
+<!------------------------------------scripts_--------------------------->
+    <script type="text/javascript" src="{%static 'js/style.js'%}"></script>
+    <script type="text/javascript" src="{%static 'js/jquery.min.js'%}"></script>
+	<script type="text/javascript" src="{%static 'bootstrap/js/bootstrap.min.js'%}"></script>
+<!------------------------x------------scripts_----------x---------------------->
 </body>
 </html>
