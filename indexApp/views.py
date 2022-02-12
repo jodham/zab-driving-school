@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, HttpResponseRedirect
+from django.template.context_processors import request
 from django.urls import reverse_lazy
 
 from .models import *
@@ -80,8 +81,10 @@ class VehicleUpdateView(UpdateView):
 # ------------------x-----------updateView-------x---------->
 
 # -----------------------------DetailView------------------>
-class CustomerDetailView(DetailView):
-    model = Customer
+class CustomerDetail(request, id):
+    customerDetails = Customer.objects.all()
+    return HttpResponseRedirect(reverse("customer-detail", args=[Customer.id]))
+
 
 
 class StaffDetailView(DetailView):

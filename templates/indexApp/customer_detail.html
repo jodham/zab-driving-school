@@ -1,10 +1,20 @@
 {% extends 'assets/base.html' %}
 {% block content %}
 <div class="container">
-  <div class="py-5 text-center"> {{object.fname}} </div>
+  <div class="py-5 text-center mt-3 h3 text-info"> {{object.fname}}</div>
     <div class="row">
       <div class="col-md-7 p-3">
-        customer details
+      <div class="card">
+          <div class="card-header">
+            <label class="h5  ml-3">{{object.fname}}</label>
+            <label class="h5 ml-3">{{object.lname}}</label>
+          </div>
+          <div class="card-body">
+                <label class="h5 ml-4">{{object.phone}}</label>
+                <label class="h5  ml-4">{{object.email}}</label>
+                <label class="h5  ml-4">{{object.License_type}}</label>
+          </div>
+      </div>
       </div>
     </div>
 

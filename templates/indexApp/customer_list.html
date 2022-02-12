@@ -15,14 +15,14 @@
         </div>
         {% for x in customer %}
         <div class="col-md-12 p-2">
-            <div class="card customer-card-elements">
-                <label class="h5  ml-2">{{x.customer_id}}</label>
-                <label class="h5  ml-4">{{x.fname}}</label>
-                <label class="h5 ml-4">{{x.lname}}</label>
-                <label class="h5 ml-4">{{x.phone}}</label>
-                <label class="h5  ml-4">{{x.email}}</label>
-                <label class="h5  ml-4">{{x.License_type}}</label>
-            </div>
+                <div class="card customer-card-elements">
+                    <label class="h5  ml-2"><a href="#">{{x.id}}</a></label>
+                    <label class="h5  ml-4">{{x.fname}}</label>
+                    <label class="h5 ml-4">{{x.lname}}</label>
+                    <label class="h5 ml-4">{{x.phone}}</label>
+                    <label class="h5  ml-4">{{x.email}}</label>
+                    <label class="h5  ml-4">{{x.License_type}}</label>
+                </div>
         </div>
         {% endfor %}
 

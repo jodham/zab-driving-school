@@ -66,7 +66,7 @@ class Vehicle(models.Model):
 
 
 class Customer(models.Model):
-    customer_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     fname = models.CharField(max_length=25)
     lname = models.CharField(max_length=25)
     DOB = models.DateField()
