@@ -4,7 +4,6 @@
     <div class="py-5 text-center h3 mt-3 text-info">View Vehicles</div>
              <div class="float-right">
              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'vehicle-create' %}">Add vehicle</a>
-             <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>
          </div>
     <div class="row">
         <div class="col-md-10 mt-3 p-3  shadow-lg">
@@ -18,7 +17,9 @@
                 <div class="card-body">
                    <label>Model : {{x.vehicleModel}}</label>
                     <label>Details : {{x.registrationDetails}}</label>
-                    <a class="btn btn-primary" href="#">edit>></a>
+                     <label>Status : Available</label>
+                    <a class="btn btn-primary" href="#">update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>
                 </div>
               </div>
             </div>

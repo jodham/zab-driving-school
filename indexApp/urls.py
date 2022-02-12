@@ -9,6 +9,7 @@ from .views import (
     RequestsListView,
     VehicleCreateView,
     VehicleListView,
+    VehicleDeleteView,
     VehicleUpdateView
 )
 
@@ -27,6 +28,7 @@ urlpatterns = [
 
 
     path('vehicle/', VehicleListView.as_view(), name='vehicle'),
-    path('vehicle/new/', VehicleCreateView.as_view(), name='vehicle-create'),
+    path('vehicle/add/', VehicleCreateView.as_view(), name='vehicle-create'),
+    path('vehicle/<int:pk>/delete/', VehicleDeleteView.as_view(), name='vehicle_delete'),
     path('vehicle/<str:pk>/update/', VehicleUpdateView.as_view(), name='vehicle-update'),
 ]

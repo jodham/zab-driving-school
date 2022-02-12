@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
+
 from .models import *
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 
 
@@ -43,7 +45,6 @@ class LessonsListView(ListView):
 
 class CustomerListView(ListView):
     model = Customer
-    template_name = 'driveAdmin/customer.html'
     context_object_name = 'customer'
 
 
@@ -61,6 +62,10 @@ class VehicleCreateView(CreateView):
     model = Vehicle
     fields = ['vehicletypeId', 'vehicleModel', 'registrationDetails']
 
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
 # ------------------x-----------CreateView-------x---------->
 
 # -----------------------------updateView------------------>
@@ -77,10 +82,21 @@ class VehicleUpdateView(UpdateView):
 # -----------------------------DetailView------------------>
 class CustomerDetailView(DetailView):
     model = Customer
-    template_name = 'indexApp/customer_detail.html'
 
 
 class StaffDetailView(DetailView):
     model = Staff
     template_name = 'indexApp/staff_detail.html'
+
+
 # -----------------------------DetailView------------------>
+# -----------------------------deleteView------------------>
+class VehicleDeleteView(DeleteView):
+    model = Vehicle
+    success_url = reverse_lazy('vehicle')
+
+    def get_context_data(self, **kwargs):
+        context = super(VehicleDeleteView, self).get_context_data(**kwargs)
+        context['something'] = Vehicle.objects.filter(pk=self.kwargs.get('pk'))
+        return context
+# ------------------x-----------deleteView---------x--------->

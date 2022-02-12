@@ -62,7 +62,7 @@ class Vehicle(models.Model):
         return f'{self.vehicleModel}'
 
     def get_abolute_url(self):
-        return reverse('vehicle-update', kwargs={'pk': self.pk})
+        return reverse('vehicle', kwargs={'pk': self.pk})
 
 
 class Customer(models.Model):

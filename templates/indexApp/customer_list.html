@@ -1,0 +1,31 @@
+{% extends 'assets/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="py-5 text-center h3 mt-3 text-info">Available Customers</div>
+    <div class="row shadow-lg">
+        <div class="col-md-11 mt-3 p-2">
+            <div class="card customer-card-elements">
+                <label class="h4 text-info ml-2">Id</label>
+                <label class="h4 text-info ml-5">First Name</label>
+                <label class="h4 text-info ml-5">Second Name</label>
+                <label class="h4 text-info ml-5">Phone</label>
+                <label class="h4 text-info ml-5">Email</label>
+                <label class="h4 text-info ml-5">License Type</label>
+            </div>
+        </div>
+        {% for x in customer %}
+        <div class="col-md-12 p-2">
+            <div class="card customer-card-elements">
+                <label class="h5  ml-2">{{x.customer_id}}</label>
+                <label class="h5  ml-4">{{x.fname}}</label>
+                <label class="h5 ml-4">{{x.lname}}</label>
+                <label class="h5 ml-4">{{x.phone}}</label>
+                <label class="h5  ml-4">{{x.email}}</label>
+                <label class="h5  ml-4">{{x.License_type}}</label>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock content %}
