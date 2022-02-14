@@ -1,12 +1,14 @@
 {%extends 'assets/base.html'%}
 {% block content %}
 <div class="container">
-  <div class="card">
+	<div class="py-5 h3 mt-3 text-danger text-center">Carefull this action is irreversible!!!</div>
+<div class="col-md-6 p-3 shadow-lg">
+  <div class="card mt-3 p-2">
   	<form method="POST">
   		{% csrf_token %}
   		<fieldset class="form-group">
-  			<legend class="border-bottom mb-4">Delete Post</legend>
-            <h2>Are you sure to delete vehicle {{object.registrationDetails}}</h2>
+  			<legend class="border-bottom mb-4">Delete Vehicle</legend>
+            <h4>Are you sure to delete vehicle {{object.registrationDetails}}</h4>
   		</fieldset>
   		<div class="from-group">
   			<button class="btn btn-outline-danger" type="submit">Yes, delete</button>
@@ -14,5 +16,6 @@
   		</div>
   	</form>
   </div>
+</div>
 </div>
 {% endblock content %}

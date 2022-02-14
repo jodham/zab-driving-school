@@ -69,8 +69,8 @@ class Vehicle(models.Model):
     def __str__(self):
         return f'{self.vehicleModel}'
 
-    def get_abolute_url(self):
-        return reverse('vehicle', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('vehicle-detail', kwargs={'pk': self.pk})
 
 
 class Customer(models.Model):
@@ -90,7 +90,7 @@ class Customer(models.Model):
 
 
 class Service_type(models.Model):
-     servicetypeDesc = models.CharField(max_length=100)
+    servicetypeDesc = models.CharField(max_length=100)
 
 
 class Service(models.Model):
@@ -108,7 +108,6 @@ class Request(models.Model):
     requestId = models.CharField(primary_key=True, max_length=10)
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     startDate = models.DateTimeField()
-    RequestStatusId = models.ForeignKey(RequestStatus, on_delete=models.CASCADE)
     vehicleTypeId = models.ForeignKey(VehicleType, on_delete=models.CASCADE)
     DateCreated = models.DateTimeField(timezone.now)
     Created_by = models.CharField(max_length=25)
@@ -131,6 +130,9 @@ class Reservation_status(models.Model):
     reservationStatusdesc = models.TextField()
     is_active = models.CharField(max_length=1)
 
+    def __str__(self):
+        return f'{self.is_active}'
+
 
 class Reservation(models.Model):
     reservationId = models.CharField(unique=True, max_length=10)
@@ -139,7 +141,6 @@ class Reservation(models.Model):
     Service_lessonId = models.ForeignKey(Service_lesson, on_delete=models.CASCADE)
     staff_id = models.ForeignKey(Staff, on_delete=models.CASCADE)
     lesson_scheduled_date = models.DateTimeField()
-    reservation_statusID = models.ForeignKey(Reservation_status, on_delete=models.CASCADE)
     Created_date = models.DateField()
     created_by = models.CharField(max_length=25)
     last_modified_date = models.DateTimeField()

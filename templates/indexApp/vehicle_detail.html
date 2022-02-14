@@ -1,0 +1,22 @@
+{% extends 'assets/base.html' %}
+{% block content %}
+<div class="container">
+  <div class="py-5 text-center mt-3 text-info h3">Vehicle Id : {{object.id}}</div>
+    <div class="row">
+      <div class="col-md-6 p-3 shadow-lg">
+        <div class="card">
+            <div class="card-header">
+                <img class="card-img-top" src="/static/cars/car1.png" alt="car image">
+              </div>
+            <div class="card-body">
+              <p> <label>Model : {{object.vehicleModel}}</label></p>
+              <p> <label>Details : {{object.registrationDetails}}</label></p>
+              <p> <label>Status : Available</label></p>
+               <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'vehicle-update' object.id %}">Update Car</a>
+              <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'vehicle_delete' object.id%}">Remove Car</a>
+            </div>
+        </div>
+     </div>
+    </div>
+</div>
+{% endblock content %}

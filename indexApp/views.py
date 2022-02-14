@@ -17,7 +17,7 @@ def index(request):
     totalcustomers = Customer.objects.all().count()
     totalrequests = Request.objects.all().count()
     context = {'totalstaff': totalstaff, 'totalvehicles': totalvehicles,
-               'totallessons': totallessons, 'totalcustomers': totalcustomers, 'totalrequests': totalrequests}
+               'totallessons': totallessons, 'totalcustomers': totalcustomers}
     return render(request, 'driveAdmin/adminIndex.html', context)
 
 
@@ -90,10 +90,10 @@ class JobTitleCreateView(CreateView):
 # -----------------------------updateView------------------>
 class VehicleUpdateView(UpdateView):
     model = Vehicle
-    fields = ['vehicleId', 'vehicletypeId', 'vehicleModel', 'registrationDetails']
+    fields = ['vehicletypeId', 'vehicleModel', 'registrationDetails']
 
     def form_valid(self, form):
-        return super().form_valid()
+        return super(VehicleUpdateView, self).form_valid(form)
 
 
 class StaffUpdateView(UpdateView):
@@ -126,11 +126,6 @@ class VehicleDetailView(DetailView):
 class VehicleDeleteView(DeleteView):
     model = Vehicle
     success_url = reverse_lazy('vehicle')
-
-    def get_context_data(self, **kwargs):
-        context = super(VehicleDeleteView, self).get_context_data(**kwargs)
-        context['something'] = Vehicle.objects.filter(pk=self.kwargs.get('pk'))
-        return context
 
 
 class StaffDeleteView(DeleteView):
