@@ -1,0 +1,25 @@
+{% extends 'assets/base.html' %}
+{% block content %}
+<div class="container">
+  <div class="py-5 text-center mt-3 text-warning h3">This action is irreversible!!!</div>
+  <div class="row">
+
+      <form method="post">
+        {% csrf_token %}
+          <fieldset class="form-group border">
+              <legend class="border-bottom mb-4">Delete Staff</legend>
+              <h5>Are you sure to delete</h5>
+              <label class="h4 text-secondary">
+                  staff {{object.fname}}  {{object.lname}}
+              </label>
+
+
+            <div class="form-group">
+              <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+              <a class="btn btn-outline-secondary" href="{% url 'staff-detail' object.id%}">No, Cancel</a>
+             </div>
+          </fieldset>
+      </form>
+  </div>
+</div>
+{% endblock content %}

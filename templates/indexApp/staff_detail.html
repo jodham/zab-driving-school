@@ -1,11 +1,26 @@
 {% extends 'assets/base.html' %}
 {% block content %}
 <div class="container">
-  <div class="py-5 text-center"> {{object.fname}} </div>
+  <div class="py-5 text-center mt-3 text-info h3">Staff : {{object.fname}} </div>
     <div class="row">
-      <div class="col-md-7 p-3">
-
-      </div>
+      <div class="col-md-6 p-3 shadow-lg">
+        <div class="card">
+          <div class="card-header h4">
+            {{object.fname}} {{object.lname}}
+              <div class="float-right">
+                    <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'staff-update' object.id %}">Update Staff</a>
+                     <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'staff-delete' object.id %}">Remove Staff</a>
+             </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6 h4">{{object.job_titleId}}</div>
+              <div class="col-sm-6 h4">{{object.email}}</div>
+              <div class="col-sm-6 h4">{{object.mobile}}</div>
+            </div>
+          </div>
+        </div>
+     </div>
     </div>
 
 </div>

@@ -2,30 +2,34 @@
 {% block content %}
 <div class="container">
     <div class="py-5 text-center h3 mt-3 text-info">Available Customers</div>
-    <div class="row shadow-lg">
-        <div class="col-md-11 mt-3 p-2">
-            <div class="card customer-card-elements">
-                <label class="h4 text-info ml-2">Id</label>
-                <label class="h4 text-info ml-5">First Name</label>
-                <label class="h4 text-info ml-5">Second Name</label>
-                <label class="h4 text-info ml-5">Phone</label>
-                <label class="h4 text-info ml-5">Email</label>
-                <label class="h4 text-info ml-5">License Type</label>
-            </div>
-        </div>
-        {% for x in customer %}
-        <div class="col-md-12 p-2">
-                <div class="card customer-card-elements">
-                    <label class="h5  ml-2"><a href="#">{{x.id}}</a></label>
-                    <label class="h5  ml-4">{{x.fname}}</label>
-                    <label class="h5 ml-4">{{x.lname}}</label>
-                    <label class="h5 ml-4">{{x.phone}}</label>
-                    <label class="h5  ml-4">{{x.email}}</label>
-                    <label class="h5  ml-4">{{x.License_type}}</label>
-                </div>
-        </div>
-        {% endfor %}
+    <div class="row">
+          <div class="col-md-10 mt-3 p-3 shadow-lg">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">License Type</th>
+                </tr>
+              </thead>
 
+                <tbody>
+                    {% for x in customer %}
+                          <tr>
+                                <td><label class="h5"><a href="{% url 'customer-detail' x.id%}">{{x.id}}</a></label></td>
+                                <td><label class="h5">{{x.fname}}</label></td>
+                                <td><label class="h5">{{x.lname}}</label></td>
+                                <td><label class="h5">{{x.phone}}</label></td>
+                                <td><label class="h5">{{x.email}}</label></td>
+                                <td><label class="h5">{{x.License_type}}</label></td>
+                          </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 {% endblock content %}

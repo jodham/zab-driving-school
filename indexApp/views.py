@@ -67,6 +67,24 @@ class VehicleCreateView(CreateView):
         return super().form_valid(form)
 
 
+class VehicleTypeCreateView(CreateView):
+    model = VehicleType
+    fields = ['vehicletypeDesc']
+
+
+class StaffCreateView(CreateView):
+    model = Staff
+    fields = ['staffId', 'fname', 'lname', 'email', 'mobile', 'job_titleId']
+
+    def form_valid(self, form):
+        return super(StaffCreateView, self).form_valid(form)
+
+
+class JobTitleCreateView(CreateView):
+    model = JobTitle
+    fields = ['job_titleDesc']
+
+
 # ------------------x-----------CreateView-------x---------->
 
 # -----------------------------updateView------------------>
@@ -78,18 +96,29 @@ class VehicleUpdateView(UpdateView):
         return super().form_valid()
 
 
+class StaffUpdateView(UpdateView):
+    model = Staff
+    fields = ['staffId', 'fname', 'lname', 'email', 'mobile', 'job_titleId']
+
+    def form_valid(self, form):
+        return super(StaffUpdateView, self).form_valid(form)
+
+
 # ------------------x-----------updateView-------x---------->
 
 # -----------------------------DetailView------------------>
-class CustomerDetail(request, id):
-    customerDetails = Customer.objects.all()
-    return HttpResponseRedirect(reverse("customer-detail", args=[Customer.id]))
-
+class CustomerDetailView(DetailView):
+    model = Customer
+    template_name = 'indexApp/customer_detail.html'
 
 
 class StaffDetailView(DetailView):
     model = Staff
     template_name = 'indexApp/staff_detail.html'
+
+
+class VehicleDetailView(DetailView):
+    model = Vehicle
 
 
 # -----------------------------DetailView------------------>
@@ -102,4 +131,9 @@ class VehicleDeleteView(DeleteView):
         context = super(VehicleDeleteView, self).get_context_data(**kwargs)
         context['something'] = Vehicle.objects.filter(pk=self.kwargs.get('pk'))
         return context
+
+
+class StaffDeleteView(DeleteView):
+    model = Staff
+    success_url = reverse_lazy('staff')
 # ------------------x-----------deleteView---------x--------->

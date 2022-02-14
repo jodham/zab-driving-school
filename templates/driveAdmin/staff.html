@@ -2,6 +2,9 @@
 {% block content %}
 <div class="container">
     <div class="py-5 text-center h3 mt-3 text-info">Available Staff</div>
+         <div class="float-right">
+             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'new-staff' %}">Add Staff</a>
+         </div>
     <div class="row">
         <div class="col-md-10 mt-3 p-3 shadow-lg">
             <table class="table">
@@ -11,21 +14,20 @@
                   <th scope="col">First</th>
                   <th scope="col">Last</th>
                   <th scope="col">email</th>
-                  <th scope="col">address</th>
                   <th scope="col">phone</th>
+                    <th scope="col">Post</th>
                   <!--<th scope="col">Job Title</th>-->
                 </tr>
               </thead>
               <tbody>
               {%for x in staff %}
                 <tr>
-                    <th scope="row"><a href="#"> {{x.staffId}}</a></th>
+                  <td><a href="{% url 'staff-detail' x.id%}">{{x.staffId}}</a></td>
                   <td>{{x.fname}}</td>
                   <td>{{x.lname}}</td>
                   <td>{{x.email}}</td>
-                  <td>{{x.addressId}}</td>
                   <td>{{x.mobile}}</td>
-
+                    <td>{{x.job_titleId}}</td>
                 </tr>
                 {% endfor %}
               </tbody>
