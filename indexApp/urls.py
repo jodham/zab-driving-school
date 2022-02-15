@@ -15,7 +15,7 @@ urlpatterns = [
     path('customer/', CustomerListView.as_view(), name='customer'),
     path('customer/<int:pk>/', CustomerDetailView.as_view(), name='customer-detail'),
 
-    path('request/', RequestsListView.as_view(), name='request'),
+    path('application/', RequestsListView.as_view(), name='request'),
     path('jobtitle/new/', JobTitleCreateView.as_view(), name='new-JobTitle'),
 
     path('vehicle/', VehicleListView.as_view(), name='vehicle'),
@@ -24,4 +24,6 @@ urlpatterns = [
     path('vehicle/<int:pk>/', VehicleDetailView.as_view(), name='vehicle-detail'),
     path('vehicle/<int:pk>/delete/', VehicleDeleteView.as_view(), name='vehicle_delete'),
     path('vehicle/<str:pk>/update/', VehicleUpdateView.as_view(), name='vehicle-update'),
+
+    path('register/', register, name="register")
 ]

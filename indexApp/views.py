@@ -15,9 +15,9 @@ def index(request):
     totalvehicles = Vehicle.objects.all().count()
     totallessons = Lesson.objects.all().count()
     totalcustomers = Customer.objects.all().count()
-    totalrequests = Request.objects.all().count()
+    totalrequests = Application.objects.all().count()
     context = {'totalstaff': totalstaff, 'totalvehicles': totalvehicles,
-               'totallessons': totallessons, 'totalcustomers': totalcustomers}
+               'totallessons': totallessons, 'totalcustomers': totalcustomers, 'totalrequests': totalrequests}
     return render(request, 'driveAdmin/adminIndex.html', context)
 
 
@@ -50,7 +50,7 @@ class CustomerListView(ListView):
 
 
 class RequestsListView(ListView):
-    model = Request
+    model = Application
     template_name = 'driveAdmin/request.html'
     context_object_name = 'request'
 
@@ -131,4 +131,15 @@ class VehicleDeleteView(DeleteView):
 class StaffDeleteView(DeleteView):
     model = Staff
     success_url = reverse_lazy('staff')
+
+
 # ------------------x-----------deleteView---------x--------->
+def register(request):
+    if request.method == 'POST':
+        fname = request.POST.get('firstname')
+        lname = request.POST.get('secondname')
+        email= request.POST.get('email')
+        username = request.POST.get('username')
+        DOB = request.POST.get('DOB')
+        password = request.POST.get('password1')
+    return render(request, 'driveAdmin/register.html')
