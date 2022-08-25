@@ -2,7 +2,9 @@
 {% block content %}
 <div class="container">
     <div class="py-5 text-center h3 mt-3 text-info">View Lessons</div>
+     <div class="float-right"><a class="btn btn-primary" href="{%url 'new_lesson'%}">Add Course</a> </div>
     <div class="row">
+
         <div class="col-md-10 mt-3 p-3 shadow-lg">
             <table class="table">
               <thead>
@@ -11,27 +13,19 @@
                   <th scope="col">Lesson Title</th>
                   <th scope="col">Duration</th>
                   <th scope="col">Cost</th>
+                  <th scope="col">view</th>
                 </tr>
               </thead>
               <tbody>
+                {%for x in lesson%}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
+                  <th scope="row">{{x.pk}}</th>
+                  <td>{{x.lessonTitle}}</td>
+                  <td>{{x.duration}}</td>
+                  <td>{{x.cost}}</td>
+                  <td><a class="btn btn-info" href="{%url 'lesson-detail' x.pk%}">>></a> </td>
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
+              {%endfor%}
               </tbody>
             </table>
         </div>

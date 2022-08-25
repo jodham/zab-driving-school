@@ -1,0 +1,50 @@
+{% extends 'assets/base.html'%}
+{% block content%}
+<div class="container">
+  <div class="py-5 mt-3 p-3 text-center text-info">Profile</div>
+  <div class="row">
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="card-body">
+            <img src="/static/cars/default.jpg" class="card-img-top" alt="profile-image">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header text-center text-info">Information</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6">
+                    <p class="font-weight-bold">First Name</p>
+                    <h6 class="text-info">{{user.first_name}}</h6>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-weight-bold">Second Name</p>
+                    <h6 class="text-info">{{user.last_name}}</h6>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-weight-bold">Username</p>
+                    <h6 class="text-info">{{user.username}}</h6>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-weight-bold">Email</p>
+                    <h6 class="text-info">{{user.email}}</h6>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-weight-bold">phone</p>
+                    <h6 class="text-info">{{user.Student.phone}}</h6>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-weight-bold">Category</p>
+                    <h6 class="text-info">{{category}}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content%}

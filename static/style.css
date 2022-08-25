@@ -115,5 +115,23 @@ body{
 .customer-card-elements{
 	display: inline-block;
 }
+.textImageOverlay{
+	color: darkblue;
+	font-weight: 700;
+	font-size: 34px;
+	font-family: fantasy;
+
+}
+.welcometext{
+	font-size: 35px;
+	font-weight: bolder;
+	color: #17252A;
+}
+.welcometextparagraph{
+	color: #2B7A7B;
+	font-weight: bold;
+	font-size: 25px;
+}
 /*---------------x-----------------customer--page-------x-----*/
+
 /*----------------x---------styles--------------x-----------*/

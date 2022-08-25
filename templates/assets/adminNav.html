@@ -7,7 +7,10 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'index' %}">Dashboard <span class="sr-only">(current)</span></a>
       </li>
 
       <li class="nav-item">
@@ -26,11 +29,26 @@
         <a class="nav-link" href="#">Services</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="{% url 'request' %}">Requests</a>
+        <a class="nav-link" href="{% url 'request' %}">Applications</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'myapplication'%}">myApplications</a>
+      </li>
+      {% if user.is_authenticated%}
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'profile'%}">Profile</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{%url 'logout'%}">Logout</a>
+      </li>
+      {%else%}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'register' %}">Register</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      {%endif%}
     </ul>
   </div>
 </nav>

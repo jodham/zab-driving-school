@@ -11,20 +11,28 @@
                   <th scope="col">First Name</th>
                   <th scope="col">Last Name</th>
                   <th scope="col">Phone</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">License Type</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">License Type</th>
+                  <th scope="col">status</th>
+                  <th scope="col">View</th>
                 </tr>
               </thead>
 
                 <tbody>
-                    {% for x in customer %}
+                    {% for x in student %}
                           <tr>
                                 <td><label class="h5"><a href="{% url 'customer-detail' x.id%}">{{x.id}}</a></label></td>
                                 <td><label class="h5">{{x.fname}}</label></td>
                                 <td><label class="h5">{{x.lname}}</label></td>
                                 <td><label class="h5">{{x.phone}}</label></td>
                                 <td><label class="h5">{{x.email}}</label></td>
-                                <td><label class="h5">{{x.License_type}}</label></td>
+                                <td><label class="h5">{{x.course}}</label>
+                                {%if x.is_active == True%}
+                                </td><td><label class="h5">active</label></td>
+                                {%else%}
+                                </td><td><label class="h5">Disabled</label></td>
+                                {%endif%}
+                                <td><label class="h5"><a class="btn btn-info" href="{% url 'customer-detail' x.id%}">>></a> </label></td>
                           </tr>
                   {% endfor %}
                 </tbody>

@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 from django.urls import reverse
 
@@ -13,6 +15,20 @@ from django.urls import reverse
 
 # def __str__(self):
 #   return f'{self.city, self.zipcode}'
+class profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(default='default.jpg', upload_to="profilepics", null=True)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 
 class JobTitle(models.Model):
@@ -31,7 +47,7 @@ class Staff(models.Model):
     fname = models.CharField(max_length=25)
     lname = models.CharField(max_length=25)
     email = models.EmailField()
-    # addressId = models.ForeignKey(adress, on_delete=models.CASCADE)
+    category = models.CharField(max_length=5, default='staff')
     mobile = models.CharField(max_length=15)
     job_titleId = models.ForeignKey(JobTitle, on_delete=models.CASCADE)
     is_active = models.CharField(max_length=3)
@@ -66,6 +82,7 @@ class Vehicle(models.Model):
     vehicletypeId = models.ForeignKey(VehicleType, on_delete=models.CASCADE)
     vehicleModel = models.CharField(max_length=30)
     registrationDetails = models.CharField(max_length=30)
+    image = models.ImageField(upload_to='images', default='static/images/default.jpg')
 
     def __str__(self):
         return f'{self.vehicleModel}'
@@ -73,14 +90,30 @@ class Vehicle(models.Model):
     def get_absolute_url(self):
         return reverse('vehicle-detail', kwargs={'pk': self.pk})
 
+    @property
+    def imageUrl(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
-class Customer(models.Model):
+
+from django.utils.dateparse import parse_date
+
+default_date = parse_date('2000-01-01')
+
+
+class Student(models.Model):
+    userid = models.ForeignKey(User, on_delete=models.CASCADE)
     fname = models.CharField(max_length=25)
     lname = models.CharField(max_length=25)
-    DOB = models.DateField()
+    category = models.CharField(max_length=8, default='Students')
+    DOB = models.DateField(default=default_date, editable=True)
     phone = models.CharField(max_length=15)
+    course = models.CharField(max_length=30, default='Driving')
     email = models.EmailField()
-    is_active = models.CharField(max_length=1)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.fname, self.lname}'
@@ -114,13 +147,13 @@ class RequestStatus(models.Model):
 
 
 class Application(models.Model):
-    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
     license_type = models.ForeignKey(LicenseType, on_delete=models.CASCADE)
     DateCreated = models.DateTimeField(timezone.now)
     Author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.customer_id}'
+        return f'{self.student_id}'
 
 
 class Lesson(models.Model):
@@ -131,6 +164,9 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f'{self.lessonTitle}'
+
+    def get_absolute_url(self):
+        return reverse('lesson-detail', kwargs={'pk': self.pk})
 
 
 class Service_lesson(models.Model):
