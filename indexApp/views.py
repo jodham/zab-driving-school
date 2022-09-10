@@ -1,19 +1,25 @@
+from abc import ABC
+
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.template.context_processors import request
 from django.urls import reverse_lazy
-from .forms import SignupForm
+from .forms import SignupForm, StaffCreateView
 from .models import *
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
-from .decorators import allowed_users, admin_only
-
-# -------------------x-----------ListView------------------>
+import random
 
 
-@allowed_users(allowed_roles=['admin'])
-@admin_only
+# from .decorators import allowed_users, admin_only
+
+
+# @allowed_users(allowed_roles=['admin'])
+# @admin_only
 def index(request):
     totalstaff = Staff.objects.all().count()
     totalvehicles = Vehicle.objects.all().count()
@@ -29,7 +35,7 @@ def home(request):
     return render(request, 'userIndex/index.html')
 
 
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 class StaffListView(ListView):
     model = Staff
     template_name = 'driveAdmin/staff.html'
@@ -41,26 +47,27 @@ class StaffListView(ListView):
         return context
 
 
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 class VehicleListView(ListView):
     model = Vehicle
     template_name = 'driveAdmin/vehicle.html'
     context_object_name = 'vehicle'
 
 
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 class LessonsListView(ListView):
     model = Lesson
     template_name = 'driveAdmin/lesson.html'
     context_object_name = 'lesson'
 
 
+# @allowed_users(allowed_roles=['admin'])
 class CustomerListView(ListView):
     model = Student
     context_object_name = 'student'
 
 
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 class RequestsListView(ListView):
     model = Application
     template_name = 'driveAdmin/request.html'
@@ -72,11 +79,17 @@ class ApplicationListView(ListView):
     context_object_name = 'application'
 
 
+class LicenseTypeListView(ListView):
+    model = LicenseType
+    context_object_name = 'licenses'
+    template_name = 'indexApp/application_form.html'
+
+
 # -------------------x-----------ListView------------------>
 
 
 # -----------------------------CreateView------------------>
-class VehicleCreateView(CreateView):
+class VehicleCreateView(LoginRequiredMixin, CreateView):
     model = Vehicle
     fields = ['vehicletypeId', 'vehicleModel', 'registrationDetails', 'image']
 
@@ -84,25 +97,63 @@ class VehicleCreateView(CreateView):
         return super().form_valid(form)
 
 
-class VehicleTypeCreateView(CreateView):
+class VehicleTypeCreateView(LoginRequiredMixin, CreateView):
     model = VehicleType
     fields = ['vehicletypeDesc']
 
 
-class StaffCreateView(CreateView):
-    model = Staff
-    fields = ['staffId', 'fname', 'lname', 'email', 'mobile', 'job_titleId']
+# class StaffCreateView(CreateView):
+#     model = Staff
+#     fields = ['staffId', 'fname', 'lname', 'email', 'mobile', 'job_titleId']
+#
+#     def form_valid(self, form):
+#         lowercase = "abcdefghijklmnopqrstuvwxyz"
+#         uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+#         number = '0123456789'
+#         symbols = "#@&$"
+#
+#         Use_for = lowercase + uppercase + number + symbols
+#         pass_length = 8
+#         password = "".join(random.sample(Use_for, pass_length))
+#
+#         fname = request.POST['fname']
+#         lname = request.POST['lname']
+#         email = request.POST['email']
+#
+#         User.objects.create_user(first_name=fname, last_name=lname, email=email)
+#         user = authenticate(email=email, pasword=password)
+#         return super(StaffCreateView, self).form_valid(form)
 
-    def form_valid(self, form):
-        return super(StaffCreateView, self).form_valid(form)
+
+def StaffCreateForm(request):
+    if request.method == 'POST':
+        form = StaffCreateView(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # username = form.cleaned_data.get('username')
+            # password = form.cleaned_data.get('password1')
+            staffId = request.POST['staffId']
+            fname = request.POST['first_name']
+            lname = request.POST['last_name']
+            phone = request.POST['phone']
+            email = request.POST['email']
+
+            group = Group.objects.get(name='staff')
+            user.groups.add(group)
+
+            Staff.objects.create(staffId=staffId, fname=fname, lname=lname, phone=phone, email=email)
+            return redirect('staff')
+    else:
+        form = SignupForm()
+    return render(request, 'indexApp/staff_form.html', {'form': form})
 
 
-class JobTitleCreateView(CreateView):
+class JobTitleCreateView(LoginRequiredMixin, CreateView):
     model = JobTitle
     fields = ['job_titleDesc']
 
 
-class LessonCreateView(CreateView):
+class LessonCreateView(LoginRequiredMixin, CreateView):
     model = Lesson
     fields = ['lessonTitle', 'cost', 'duration']
 
@@ -110,18 +161,19 @@ class LessonCreateView(CreateView):
         return super(LessonCreateView, self).form_valid(form)
 
 
-class ApplicationCreateView(CreateView):
+class ApplicationCreateView(LoginRequiredMixin, CreateView):
     model = Application
-    fields = ['student_id', 'license_type', 'DateCreated']
+    fields = ['license_type']
 
     def form_valid(self, form):
+        form.instance.student_id = self.request.user
         return super(ApplicationCreateView, self).form_valid(form)
 
 
 # ------------------x-----------CreateView-------x---------->
 
 # -----------------------------updateView------------------>
-class VehicleUpdateView(UpdateView):
+class VehicleUpdateView(LoginRequiredMixin, UpdateView):
     model = Vehicle
     fields = ['vehicletypeId', 'vehicleModel', 'registrationDetails', 'image']
 
@@ -129,7 +181,7 @@ class VehicleUpdateView(UpdateView):
         return super(VehicleUpdateView, self).form_valid(form)
 
 
-class StaffUpdateView(UpdateView):
+class StaffUpdateView(LoginRequiredMixin, UpdateView):
     model = Staff
     fields = ['staffId', 'fname', 'lname', 'email', 'mobile', 'job_titleId']
 
@@ -137,7 +189,16 @@ class StaffUpdateView(UpdateView):
         return super(StaffUpdateView, self).form_valid(form)
 
 
-class LessonUpdateView(UpdateView):
+class ApplicationUpdateView(LoginRequiredMixin, CreateView):
+    model = Application
+    fields = ['license_type']
+
+    def form_valid(self, form):
+        form.instance.student_id = self.request.user
+        return super(ApplicationUpdateView, self).form_valid(form)
+
+
+class LessonUpdateView(LoginRequiredMixin, UpdateView):
     model = Lesson
     fields = ['lessonTitle', 'cost', 'duration']
 
@@ -167,6 +228,10 @@ class VehicleDetailView(DetailView):
     model = Vehicle
 
 
+class ApplicationDetailView(DetailView):
+    model = Application
+
+
 # -----------------------------DetailView------------------>
 # -----------------------------deleteView------------------>
 class VehicleDeleteView(DeleteView):
@@ -177,6 +242,11 @@ class VehicleDeleteView(DeleteView):
 class StaffDeleteView(DeleteView):
     model = Staff
     success_url = reverse_lazy('staff')
+
+
+class ApplicationDeleteView(DeleteView):
+    model = Application
+    success_url = reverse_lazy('myapplication')
 
 
 class LessonDeleteView(DeleteView):
@@ -196,13 +266,17 @@ def signup(request):
             lname = request.POST['last_name']
             phone = request.POST['phone']
             email = request.POST['email']
+
+            group = Group.objects.get(name='student')
+            user.groups.add(group)
+
             Student.objects.create(userid=user, fname=fname, lname=lname, phone=phone, email=email)
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect('index')
     else:
         form = SignupForm()
-    return render(request, 'driveAdmin/register.html', {'form': form})
+    return render(request, 'accounts/register.html', {'form': form})
 
 
 def enter(request):
@@ -212,12 +286,12 @@ def enter(request):
         user = authenticate(password=password, username=username)
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('home')
         error = messages.warning(request, f'wrong credentials check!!')
-        templatename = 'driveAdmin/login.html'
+        templatename = 'accounts/login.html'
         context = {'error': error}
         return render(request, templatename, context)
-    templatename = 'driveAdmin/login.html'
+    templatename = 'accounts/login.html'
     context = {}
     return render(request, templatename, context)
 
@@ -228,4 +302,7 @@ def getout(request):
 
 
 def profile(request):
-    return render(request, 'userIndex/profile.html')
+    group = request.user.groups.name
+    print(group)
+    context = {'group': group}
+    return render(request, 'userIndex/profile.html', context)

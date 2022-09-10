@@ -11,27 +11,27 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">email</th>
-                  <th scope="col">address</th>
-                  <th scope="col">phone</th>
-                  <th scope="col">Job Title</th>
+                  <th scope="col">License cat</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Fee</th>
+                  <th scope="col">Date Applied</th>
+                  <th scope="col">View application</th>
                 </tr>
               </thead>
               <tbody>
-
+                {%for x in application%}
+                {%if x.student_id == request.user%}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
+                  <td>{{x.license_type.category}}</td>
+                  <td>{{x.license_type.Type}}</td>
+                  <td>{{x.license_type.Duration}}</td>
+                  <td>{{x.license_type.Fee}}</td>
+                  <td>{{x.DateCreated}}</td>
+                  <td><a href="{%url 'application-detail' x.id%}" class="btn btn-info">>></a></td>
                 </tr>
-
+                {%endif%}
+                {%endfor%}
               </tbody>
             </table>
         </div>

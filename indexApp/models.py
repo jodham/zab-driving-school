@@ -50,7 +50,7 @@ class Staff(models.Model):
     category = models.CharField(max_length=5, default='staff')
     mobile = models.CharField(max_length=15)
     job_titleId = models.ForeignKey(JobTitle, on_delete=models.CASCADE)
-    is_active = models.CharField(max_length=3)
+    is_active = models.CharField(max_length=3, default=True)
 
     def __str__(self):
         return f'{self.job_titleId, self.lname}'
@@ -61,10 +61,14 @@ class Staff(models.Model):
 
 class LicenseType(models.Model):
     licenseTypeId = models.AutoField(primary_key=True)
-    licenseTypeDesc = models.CharField(max_length=100)
+    category = models.CharField(max_length=30)
+    Type = models.CharField(max_length=30)
+    Duration = models.CharField(max_length=30)
+    Fee = models.CharField(max_length=5)
+    licenseTypeDesc = models.TextField()
 
     def __str__(self):
-        return f'{self.licenseTypeDesc}'
+        return f'{self.category}'
 
 
 class VehicleType(models.Model):
@@ -82,13 +86,10 @@ class Vehicle(models.Model):
     vehicletypeId = models.ForeignKey(VehicleType, on_delete=models.CASCADE)
     vehicleModel = models.CharField(max_length=30)
     registrationDetails = models.CharField(max_length=30)
-    image = models.ImageField(upload_to='images', default='static/images/default.jpg')
+    image = models.ImageField(null=True)
 
     def __str__(self):
         return f'{self.vehicleModel}'
-
-    def get_absolute_url(self):
-        return reverse('vehicle-detail', kwargs={'pk': self.pk})
 
     @property
     def imageUrl(self):
@@ -97,6 +98,9 @@ class Vehicle(models.Model):
         except:
             url = ''
         return url
+
+    def get_absolute_url(self):
+        return reverse('vehicle-detail', kwargs={'pk': self.pk})
 
 
 from django.utils.dateparse import parse_date
@@ -147,13 +151,15 @@ class RequestStatus(models.Model):
 
 
 class Application(models.Model):
-    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student_id = models.ForeignKey(User, on_delete=models.CASCADE)
     license_type = models.ForeignKey(LicenseType, on_delete=models.CASCADE)
-    DateCreated = models.DateTimeField(timezone.now)
-    Author = models.ForeignKey(User, on_delete=models.CASCADE)
+    DateCreated = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.student_id}'
+
+    def get_absolute_url(self):
+        return reverse('application-detail', kwargs={'pk': self.pk})
 
 
 class Lesson(models.Model):

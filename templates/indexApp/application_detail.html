@@ -1,0 +1,40 @@
+{% extends 'assets/base.html'%}
+{% block content %}
+<div class="py-5 text-center h2 mt-3">Your Application</div>
+<div class="row text-center ml-4">
+     <div class="col-lg-6 p-3 mt-4 shadow-lg">
+         <div class="card">
+             <div class="card-header servicecardheader">
+                 <span class="float-left"><a class="text-white h3" href="{%url 'myapplication'%}"><<< back</a></span>
+                 <span class="h2 text-white">License Categories</span>  <p class="h3 text-white">view list</p>
+             </div>
+             <div class="card-body">
+         <div class="box-element">
+            <div class="cart-row">
+
+                <div style="flex:2;"><strong>Category</strong></div>
+                <div style="flex:2;"><strong>type</strong></div>
+                <div style="flex:2;"><strong>Description</strong></div>
+                <div style="flex:2;"><strong>Duration</strong></div>
+                <div style="flex:2;"><strong>Fee</strong></div>
+            </div>
+
+            <div class="cart-row">
+                <div style="flex:2;"><p>{{object.license_type.category}}</p></div>
+                <div style="flex:2;"><p>{{object.license_type.Type}}</p></div>
+                <div style="flex:2;"><p>{{object.license_type.licenseTypeDesc}}</p></div>
+                <div style="flex:2;"><p>{{object.DateCreated}}</p></div>
+                <div style="flex:2;"><p>{{object.license_type.Fee}}</p></div>
+            </div>
+              <div class="float-left">
+                  <a class="btn btn-primary rounded btn-sm mt-3 mb-1" href="{%url 'application-update' object.id%}">Update Application</a>
+              </div>
+            <div class="float-right">
+                <a class="btn btn-danger rounded btn-sm mt-3 mb-1" href="{%url 'application_delete' object.id%}">Remove Application</a>
+             </div>
+        </div>
+ </div>
+</div>
+</div>
+  </div>
+{%endblock content%}

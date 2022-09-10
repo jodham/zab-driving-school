@@ -1,0 +1,24 @@
+{% extends 'assets/base.html' %}
+{% block content %}
+<div class="container">
+  <div class="py-5 text-center mt-3 text-warning h3">This action is irreversible!!!</div>
+  <div class="row">
+
+      <form method="post">
+        {% csrf_token %}
+          <fieldset class="form-group border">
+              <legend class="border-bottom mb-4 text-danger">Delete Application</legend>
+              <h5>Are you sure to delete</h5>
+              <p class="h4 text-secondary">
+                  License Cat: {{object.license_type.category}}</p>
+              <p class="h4 text-secondary">License Type: {{object.license_type.Type}}</p>
+
+            <div class="form-group">
+              <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+              <a class="btn btn-outline-secondary" href="{% url 'application-detail' object.pk %}">No, Cancel</a>
+             </div>
+          </fieldset>
+      </form>
+  </div>
+</div>
+{% endblock content %}

@@ -1,49 +1,33 @@
 {% extends 'assets/base.html' %}
 {% block content %}
 <div class="container">
-    <div class="py-5 text-center h3 mt-3 text-info">View Customer Requests</div>
+    <div class="py-5 text-center h3 mt-3 text-info">View Student Applications</div>
     <div class="row">
         <div class="col-md-10 mt-3 p-3 shadow-lg">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">email</th>
-                  <th scope="col">address</th>
-                  <th scope="col">phone</th>
-                  <th scope="col">Job Title</th>
+                  <th scope="col">Applicant id</th>
+                  <th scope="col">username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">License Cat</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Fee</th>
+                  <th scope="col">Date applied</th>
                 </tr>
               </thead>
               <tbody>
+              {%for x in request%}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
+                  <td>{{x.student_id.id}}</td>
+                  <td>{{x.student_id.username}}</td>
+                  <td>{{x.student_id.email}}</td>
+                  <td>{{x.license_type.category}}</td>
+                  <td>{{x.license_type.Type}}</td>
+                  <td>{{x.license_type.Fee}}</td>
+                  <td>{{x.DateCreated}}</td>
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
+              {%endfor%}
               </tbody>
             </table>
         </div>

@@ -4,6 +4,37 @@
   <div class="py-5 text-center mt-3 text-info h3">Create Application</div>
 
   <div class="row">
+     <div class="col-lg-6 p-3 mt-4 shadow-lg">
+                         <div class="card">
+                             <div class="card-header servicecardheader">
+                                 <span class="h2 text-white">License Categories</span>  <p class="h3 text-white">view list</p>
+                             </div>
+                             <div class="card-body">
+                                 <div class="box-element">
+            <div class="cart-row">
+
+                <div style="flex:2;"><strong>Category</strong></div>
+                <div style="flex:2;"><strong>type</strong></div>
+                <div style="flex:2;"><strong>Description</strong></div>
+                <div style="flex:2;"><strong>Duration</strong></div>
+                <div style="flex:2;"><strong>Fee</strong></div>
+            </div>
+             {%for x in licenses%}
+            <div class="cart-row">
+                <div style="flex:2;"><p>{{x.category}}</p></div>
+                <div style="flex:2;"><p>{{x.Type}}</p></div>
+                <div style="flex:2;"><p>{{x.licenseTypeDesc}}</p></div>
+                <div style="flex:2;"><p>{{x.Duration}}</p></div>
+                <div style="flex:2;"><p>{{x.Fee}}</p></div>
+            </div>
+             {%endfor%}
+        </div>
+          <a class="btn btn-success mt-3" href="{%url 'new-application'%}">Apply</a>
+ </div>
+</div>
+</div>
+  </div>
+  <div class="row">
     <div class="col-md-8 mt-3 p-3 text-center bg-info">
       <form method="post">
         {% csrf_token %}
